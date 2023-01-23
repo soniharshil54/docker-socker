@@ -54,7 +54,7 @@ services:
 
 
 networks:
- mongo:
+ hardhome-network-prod:
 
 
 volumes:

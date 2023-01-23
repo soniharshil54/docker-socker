@@ -51,5 +51,3 @@ services:
 
 networks:
   hardhome-network-prod:
-    name: hardhome-docker-network-prod
-    driver: bridge
