@@ -14,7 +14,7 @@ services:
   backend-service:
     environment:
       MONGO_CONNECTION_STRING: mongodb://mongoman:27017/todo?authSource=admin
-    image: hardhome-backend-service-image-prod:latest
+    image: soniharshil54/hardhome-backend-service-image-prod:latest
     # container_name: hardhome-backend-service-prod
     restart: on-failure
     ports:
@@ -27,7 +27,7 @@ services:
       - mongoman
 
   api-service:
-    image: hardhome-api-service-image-prod:latest
+    image: soniharshil54/hardhome-api-service-image-prod:latest
     # container_name: hardhome-api-service-prod
     restart: on-failure
     ports:
@@ -38,7 +38,7 @@ services:
      replicas: 1    
 
   frontend-service:
-    image: hardhome-frontend-service-image-prod:latest
+    image: soniharshil54/hardhome-frontend-service-image-prod:latest
     # volumes:
     #   - "./envfile:/usr/share/nginx/html/env/envfile"
     ports:
