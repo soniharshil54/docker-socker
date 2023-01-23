@@ -9,7 +9,7 @@ services:
     deploy:
      replicas: 1  
     volumes:
-      - "./mongodata:/data/db"  
+      - "mongodata:/data/db"  
 
   backend-service:
     environment:
@@ -39,8 +39,8 @@ services:
 
   frontend-service:
     image: hardhome-frontend-service-image-prod:latest
-    volumes:
-      - "./envfile:/usr/share/nginx/html/env/envfile"
+    # volumes:
+    #   - "./envfile:/usr/share/nginx/html/env/envfile"
     ports:
       - "12090:80"
     deploy:
@@ -48,3 +48,6 @@ services:
 
 networks:
   hardhome-network-prod:
+
+volumes:
+  mongo-data:  
