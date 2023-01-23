@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_IP = window._env_.REACT_APP_API_SERVER_IP || 'localhost';
+const API_IP = window._env_.REACT_APP_API_SERVER_IP || '192.168.0.226';
 const API_PORT = window._env_.REACT_APP_API_SERVER_PORT || 3091;
 const API_URL=`http://${API_IP}:${API_PORT}/todos/`;
 async function createTodo(task) {
