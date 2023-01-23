@@ -6,6 +6,8 @@ services:
     restart: always
     networks:
       - hardhome-network-prod
+    deploy:
+     replicas: 1  
     volumes:
       - "./mongodata:/data/db"  
 
@@ -22,6 +24,8 @@ services:
       - 3090:3090
     networks:
       - hardhome-network-prod
+    deploy:
+     replicas: 1    
     depends_on:
       - mongoman
 
@@ -36,6 +40,8 @@ services:
       - 3091:3091
     networks:
       - hardhome-network-prod
+    deploy:
+     replicas: 1    
     command: npm start  
 
   frontend-service:
@@ -47,6 +53,8 @@ services:
       - "./envfile:/usr/share/nginx/html/env/envfile"
     ports:
       - "12090:80"
+    deploy:
+     replicas: 1    
     restart: on-failure    
 
 networks:
