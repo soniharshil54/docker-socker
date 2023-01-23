@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  backend-service:
+    build:
+      context: hardhome-backend/
+      dockerfile: Dockerfile
+    image: hardhome-backend-service-image-build:latest
+
+  api-service:
+    build:
+      context: hardhome-api/
+      dockerfile: Dockerfile
+    image: hardhome-api-service-image-build:latest
+    
+  frontend-service:
+    build:
+      context: ./hardhome-frontend
+    image: hardhome-frontend-service-image-build:latest  

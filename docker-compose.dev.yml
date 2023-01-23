@@ -1,0 +1,58 @@
+version: "3.8"
+services:
+  mongoman:
+    image: mongo
+    restart: always
+    networks:
+      - hardhome-network
+    volumes:
+      - "./mongodata:/data/db"  
+      
+  backend-service:
+    build:
+      context: hardhome-backend/
+      dockerfile: Dockerfile.dev
+    environment:
+      MONGO_CONNECTION_STRING: mongodb://mongoman:27017/todo?authSource=admin
+    image: hardhome-backend-service-image:latest
+    restart: on-failure
+    ports:
+      - 3090:3090
+    networks:
+      - hardhome-network
+    depends_on:
+      - mongoman  
+    volumes:
+      # - hardhome_assets:/usr/src/app/assets
+      - ./hardhome-backend:/usr/src/app
+    command: npm run nodemon
+
+  api-service:
+    build:
+      context: hardhome-api/
+      dockerfile: Dockerfile.dev
+    image: hardhome-api-service-image:latest
+    restart: on-failure
+    ports:
+      - 3091:3091
+    networks:
+      - hardhome-network
+    volumes:
+      - ./hardhome-api:/usr/src/app
+    command: npm run nodemon  
+
+  frontend-service:
+    build:
+      context: hardhome-frontend/
+      dockerfile: Dockerfile.dev
+    container_name: hardhome-frontend-service-prod
+    volumes:
+      - "./envfile:/usr/share/nginx/html/env/envfile"
+    ports:
+      - "12090:80"
+    restart: on-failure   
+
+networks:
+  hardhome-network:
+    name: hardhome-docker-network
+    driver: bridge
