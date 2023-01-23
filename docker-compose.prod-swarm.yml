@@ -2,7 +2,7 @@ version: "3.8"
 services:
   mongoman:
     image: mongo
-    container_name: hardhome-mongo-prod
+    # container_name: hardhome-mongo-prod
     restart: always
     networks:
       - hardhome-network-prod
@@ -15,7 +15,7 @@ services:
     environment:
       MONGO_CONNECTION_STRING: mongodb://mongoman:27017/todo?authSource=admin
     image: hardhome-backend-service-image-prod:latest
-    container_name: hardhome-backend-service-prod
+    # container_name: hardhome-backend-service-prod
     restart: on-failure
     ports:
       - 3090:3090
@@ -28,7 +28,7 @@ services:
 
   api-service:
     image: hardhome-api-service-image-prod:latest
-    container_name: hardhome-api-service-prod
+    # container_name: hardhome-api-service-prod
     restart: on-failure
     ports:
       - 3091:3091
@@ -50,4 +50,4 @@ networks:
   hardhome-network-prod:
 
 volumes:
-  mongo-data:  
+  mongodata:  
