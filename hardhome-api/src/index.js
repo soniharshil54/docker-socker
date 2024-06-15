@@ -35,7 +35,8 @@ app.get("/healthcheck", async (req, res, next) => {
     }
     return res.json({
       message: 'ok',
-      note: 'ok'
+      note: 'ok',
+      version: 1
     })
   } catch (err) {
     console.log('err', err);
