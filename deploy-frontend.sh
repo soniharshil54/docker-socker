@@ -1,6 +1,10 @@
-aws ecr get-login-password --region us-east-1 --profile harshil-hardhome | docker login --username AWS --password-stdin ACCOUNTID.dkr.ecr.us-east-1.amazonaws.com
+set -a
+source ./.env
+set +a
+
+aws ecr get-login-password --region ${AWS_ECR_REGION} --profile soni | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_ECR_REGION}.amazonaws.com
 
 docker-compose -f docker-compose.build.yml build
 
-docker tag hardhome-frontend-service-image-build:latest 121487958432.dkr.ecr.us-east-1.amazonaws.com/hardhome-frontend-service-image-prod:latest
-docker push ACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/hardhome-frontend-service-image-prod:latest
+docker tag hardhome-frontend-service-image-prod:latest ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_ECR_REGION}.amazonaws.com/hardhome-frontend-service-image-prod:latest
+docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_ECR_REGION}.amazonaws.com/hardhome-frontend-service-image-prod:latest
